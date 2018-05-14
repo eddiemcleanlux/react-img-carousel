@@ -32,7 +32,6 @@ npm-debug.log
 *.swp
 
 # Transpiled ES5
-lib
 build
 
 # OS X
