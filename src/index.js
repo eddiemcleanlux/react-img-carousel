@@ -35,6 +35,7 @@ export default class Carousel extends Component {
       cellPadding: PropTypes.number,
       slideWidth: PropTypes.string,
       slideHeight: PropTypes.string,
+      slideClick: PropTypes.func,
       changing: PropTypes.func,
       beforeChange: PropTypes.func,
       afterChange: PropTypes.func,
@@ -693,7 +694,7 @@ export default class Carousel extends Component {
    * @param {Event} e DOM event object.
    */
   handleSlideClick(e) {
-    const { clickToNavigate } = this.props;
+    const { clickToNavigate, slideClick } = this.props;
     const { currentSlide } = this.state;
     const clickedIndex = parseInt(e.currentTarget.getAttribute('data-index'), 10);
 
@@ -701,6 +702,7 @@ export default class Carousel extends Component {
     if (!clickToNavigate || clickedIndex === currentSlide || Math.abs(this._startPos.x - e.clientX) > 0.01) {
       return;
     }
+    slideClick && slideClick({clickToNavigate, clickedIndex, currentSlide});
     if (clickedIndex === currentSlide - 1) {
       this.prevSlide();
     } else if (clickedIndex === currentSlide + 1) {
