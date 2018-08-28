@@ -135,7 +135,7 @@ export default class Carousel extends Component {
       // Whenever new images are loaded, the current slide index changes, the transition direction changes, or the
       // slide width changes, we need to recalculate the left offset positioning of the slides.
       this.calcLeftOffset();
-      changing && changing({currentSlide, direction});
+      changing && changing({ currentSlide, direction });
     }
 
     if (!areChildImagesEqual(Children.toArray(children), Children.toArray(oldChildren))) {
@@ -700,7 +700,7 @@ export default class Carousel extends Component {
 
     // If the user clicked the current slide or it appears they are dragging, don't process the click
     if (!clickToNavigate || clickedIndex === currentSlide || Math.abs(this._startPos.x - e.clientX) > 0.01) {
-      slideClick && slideClick({clickToNavigate, clickedIndex, currentSlide});
+      slideClick && slideClick({ clickToNavigate, clickedIndex, currentSlide });
       return;
     }
     if (clickedIndex === currentSlide - 1) {
