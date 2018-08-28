@@ -35,6 +35,8 @@ export default class Carousel extends Component {
       cellPadding: PropTypes.number,
       slideWidth: PropTypes.string,
       slideHeight: PropTypes.string,
+      onTouchStart: PropTypes.func,
+      onMouseDown: PropTypes.func,
       slideClick: PropTypes.func,
       changing: PropTypes.func,
       beforeChange: PropTypes.func,
@@ -718,9 +720,12 @@ export default class Carousel extends Component {
    * @param {Event} e DOM event object.
    */
   onMouseDown(e) {
-    const { draggable, transition } = this.props;
+    const { draggable, transition, onMouseDown } = this.props;
+    const { currentSlide } = this.state;
 
     e.preventDefault();
+
+    onMouseDown && onMouseDown({ currentSlide });
 
     if (draggable && transition !== 'fade' && !this._animating) {
       if (this._autoplayTimer) {
@@ -808,7 +813,10 @@ export default class Carousel extends Component {
    * @param {Event} e DOM event object.
    */
   onTouchStart(e) {
-    const { draggable, transition } = this.props;
+    const { draggable, transition, onTouchStart } = this.props;
+    const { currentSlide } = this.state;
+
+    onTouchStart && onTouchStart({ currentSlide });
 
     if (draggable && transition !== 'fade' && !this._animating) {
       if (this._autoplayTimer) {
